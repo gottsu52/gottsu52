@@ -6,7 +6,7 @@ This is a temporary script file.
 """
 import streamlit as st
 from PIL import Image
-import cv2 as cv2
+import cv2
 import numpy as np
 
 st.title('顔面隠し')
