@@ -10,7 +10,6 @@ from PIL import Image
 import numpy as np
 import cv2
 
-
 st.title('顔面隠し')
 
 uploaded_file = st.file_uploader("画像を選択してください", type ='jpg')
@@ -22,8 +21,6 @@ if button:
     image.save("uploaded.jpg")
     img_array = np.array(image)
     st.image(img_array,caption = '元画像', use_column_width = True)
-
-
 
     face_cascade_path = "haarcascade_frontalface_default.xml"
     face_cascade = cv2.CascadeClassifier(face_cascade_path)
