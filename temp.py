@@ -4,33 +4,36 @@ Spyder Editor
 
 This is a temporary script file.
 """
-
 import streamlit as st
 from PIL import Image
+import cv2
+import numpy as np
 
-import matplotlib.pyplot as plt
+st.title('顔面隠し')
 
-st.title('初めてのstreamlit')
-st.write('私の名前は中澤駿です')
-
-x = [30, 20, 15, 5]
-
-plt.pie(x)
-plt.show()
-
-text = st.text_input('あなたの名前を教えて下さい')
-'あなたの名前は,',text,'です'
-
-condition = st.slider('あなたの今の調子は？', 0,100,80)
-'コンディション: ' , condition
-
-option = st.selectbox('好きな数字を教えてください', list (['1番','2番','3番','4番']))
-'あなたが選択したのは,',option,'です'
+uploaded_file = st.file_uploader("画像を選択してください", type ='jpg')
 
 left_column, right_column = st.columns(2)
-button = left_column.button('右カラムに文字を表示')
+button = left_column.button('顔面を塗りつぶす')
 if button:
-    right_column.write('ここは右カラムです')
+    image = Image.open(uploaded_file)
+    image.save("uploaded.jpg")
+    img_array = np.array(image)
+    st.image(img_array,caption = '元画像', use_column_width = True)
+
+
+
+    face_cascade_path = "haarcascade_frontalface_default.xml"
+    face_cascade = cv2.CascadeClassifier(face_cascade_path)
+
+    src = cv2.imread('uploaded.jpg')
+    src_gray = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY) #グレースケール化
+    faces = face_cascade.detectMultiScale(src_gray)
+
+    for (x, y, w, h) in faces:
+        src[y: y + h, x: x + w] = [0, 128, 255]
     
-img = Image.open('photo_gyudon_100900.jpg')
-st.image(img, caption = 'これは推しです', use_column_width = True)
+    cv2.imwrite('opencv_mosaic_face.jpg', src)
+
+    src2 = Image.open('opencv_mosaic_face.jpg')
+    st.image(src2, caption='出力結果', use_column_width = True)
