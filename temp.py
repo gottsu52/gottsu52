@@ -4,10 +4,12 @@ Spyder Editor
 
 This is a temporary script file.
 """
+
 import streamlit as st
 from PIL import Image
-import cv2
 import numpy as np
+import cv2
+
 
 st.title('顔面隠し')
 
