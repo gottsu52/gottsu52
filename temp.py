@@ -18,6 +18,11 @@ if uploaded_file is None :
     st.write('顔面が選択されていません')
 
 else:
+    image = Image.open(uploaded_file)
+    image.save("uploaded.jpg")
+    img_array = np.array(image)
+    st.image(img_array,caption = '元画像', use_column_width = True)
+    
     left_column, right_column = st.columns(2)
     button = left_column.button('顔面を塗りつぶす')
     if button:
