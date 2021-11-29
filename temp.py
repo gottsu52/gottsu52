@@ -26,10 +26,6 @@ else:
     left_column, right_column = st.columns(2)
     button = left_column.button('顔面を塗りつぶす')
     if button:
-        image = Image.open(uploaded_file)
-        image.save("uploaded.jpg")
-        img_array = np.array(image)
-        st.image(img_array,caption = '元画像', use_column_width = True)
 
         face_cascade_path = "haarcascade_frontalface_default.xml"
         face_cascade = cv2.CascadeClassifier(face_cascade_path)
