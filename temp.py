@@ -12,6 +12,7 @@ import cv2
 
 st.title('顔面潰し')
 st.write('あなたや友人の顔面を塗りつぶします。横顔やマスクは認識しづらいので注意してください。')
+st.write('jpg形式のみ対応しています。')
 
 uploaded_file = st.file_uploader("顔面を選択してください", type ='jpg')
 
