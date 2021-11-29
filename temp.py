@@ -27,6 +27,7 @@ else:
     
     left_column, right_column = st.columns(2)
     button = left_column.button('顔面を塗りつぶす')
+    
     if button:
 
         face_cascade_path = "haarcascade_frontalface_default.xml"
